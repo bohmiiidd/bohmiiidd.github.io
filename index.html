@@ -2,26 +2,421 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Ahmed Abd - Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Profile</title>
     <style>
+        :root {
+            --primary-blue: #0a192f;
+            --secondary-blue: #172a45;
+            --accent-blue: #64ffda;
+            --text-blue: #8892b0;
+            --bright-blue: #00b0ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+
         body {
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
+            background-color: var(--primary-blue);
+            color: #e0e0e0;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(
+                rgba(10, 25, 47, 0.7),
+                rgba(10, 25, 47, 0.9)
+            ), 
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 800 800'%3E%3Cg fill='none' stroke='%23172a45' stroke-width='1'%3E%3Cpath d='M769 229L1037 260.9M927 880L731 737 520 660 309 538 40 599 295 764 126.5 879.5 40 599-197 493 102 382-31 229 126.5 79.5-69-63'/%3E%3Cpath d='M-31 229L237 261 390 382 603 493 308.5 537.5 101.5 381.5M370 905L295 764'/%3E%3Cpath d='M520 660L578 842 731 737 840 599 603 493 520 660 295 764 309 538 390 382 539 269 769 229 577.5 41.5 370 105 295 -36 126.5 79.5 237 261 102 382 40 599 -69 737 127 880'/%3E%3Cpath d='M520-140L578.5 42.5 731-63M603 493L539 269 237 261 370 105M902 382L539 269M390 382L102 382'/%3E%3Cpath d='M-222 42L126.5 79.5 370 105 539 269 577.5 41.5 927 80 769 229 902 382 603 493 731 737M295-36L577.5 41.5M578 842L295 764M40-201L127 80M102 382L-261 269'/%3E%3C/g%3E%3C/svg%3E");
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
             text-align: center;
-            padding-top: 100px;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out;
         }
-        h1 {
-            color: #333;
-            font-size: 48px;
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px var(--bright-blue), 0 0 20px rgba(0, 176, 255, 0.5);
         }
-        p {
-            color: #666;
-            font-size: 24px;
+
+        .header p {
+            font-size: 1.2rem;
+            color: var(--text-blue);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .matrix-effect {
+            position: relative;
+            padding: 1rem;
+            border: 1px solid var(--accent-blue);
+            background-color: rgba(23, 42, 69, 0.8);
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 10px var(--accent-blue);
+            margin-bottom: 3rem;
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+        }
+
+        .matrix-effect::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--bright-blue), transparent);
+            animation: scanline 3s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(100%);
+            }
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 180px;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--secondary-blue);
+            border: 1px solid var(--accent-blue);
+            border-radius: 4px;
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link:hover {
+            background-color: rgba(100, 255, 218, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 10px var(--accent-blue);
+        }
+
+        .social-link i {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .social-link::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(100, 255, 218, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .social-link:hover::before {
+            left: 100%;
+        }
+
+        .sections {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .section {
+            background-color: rgba(23, 42, 69, 0.8);
+            padding: 1.5rem;
+            border-radius: 5px;
+            border: 1px solid var(--accent-blue);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 49.5%, var(--accent-blue) 49.5%, var(--accent-blue) 50.5%, transparent 50.5%);
+            background-size: 10px 10px;
+            top: 0;
+            left: 0;
+            opacity: 0.05;
+        }
+
+        .section h2 {
+            color: var(--bright-blue);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section h2::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, var(--accent-blue), transparent);
+        }
+
+        .section p {
+            color: var(--text-blue);
+            margin-bottom: 1rem;
+        }
+
+        .section-btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: transparent;
+            border: 1px solid var(--accent-blue);
+            border-radius: 4px;
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-btn:hover {
+            background-color: rgba(100, 255, 218, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 5px var(--accent-blue);
+        }
+
+        .section-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(100, 255, 218, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .section-btn:hover::before {
+            left: 100%;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--text-blue);
+            font-size: 0.9rem;
+            animation: fadeInUp 1s ease-out 0.9s backwards;
+        }
+
+        /* Terminal text animation */
+        .terminal-text {
+            border-right: 2px solid var(--accent-blue);
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+            margin: 0 auto;
+            display: inline-block;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent-blue) }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .sections {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .social-links {
+                gap: 1rem;
+            }
+            
+            .social-link {
+                width: 150px;
+                padding: 0.7rem 1rem;
+            }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
-    <h1>Ahmed Abd</h1>
-    <p>Welcome to my portfolio!</p>
+    <div class="container">
+        <header class="header">
+            <h1>&lt;Security_Profile&gt;</h1>
+            <p class="terminal-text">Cybersecurity Specialist | Ethical Hacker | Developer</p>
+        </header>
+
+        <div class="matrix-effect">
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-discord"></i> Discord</a>
+                <a href="#" class="social-link"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                <a href="#" class="social-link"><i class="fab fa-github"></i> GitHub</a>
+                <a href="#" class="social-link"><i class="fab fa-facebook"></i> Facebook</a>
+                <a href="#" class="social-link"><i class="fas fa-cube"></i> HackTheBox</a>
+            </div>
+        </div>
+
+        <div class="sections">
+            <div class="section">
+                <h2>$ ./offensive_security</h2>
+                <p>Exploring the offensive side of cybersecurity through penetration testing, vulnerability research, and red team operations.</p>
+                <p>Specializing in network exploitation, web application security, and social engineering methodologies.</p>
+                <a href="#" class="section-btn">View OffSec &gt;</a>
+            </div>
+
+            <div class="section">
+                <h2>$ ./projects</h2>
+                <p>A collection of security tools, research papers, and open-source contributions focused on advancing cybersecurity practices.</p>
+                <p>From custom exploit development to defensive frameworks, check out my latest work.</p>
+                <a href="#" class="section-btn">View Projects &gt;</a>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; <span id="year">2025</span> | <span class="terminal-text">Secured with blue team tactics, exploited with red team skills</span></p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Matrix rain effect
+        function createMatrixRain() {
+            const canvas = document.createElement('canvas');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            canvas.style.position = 'fixed';
+            canvas.style.top = '0';
+            canvas.style.left = '0';
+            canvas.style.zIndex = '-2';
+            canvas.style.opacity = '0.05';
+            document.body.appendChild(canvas);
+            
+            const ctx = canvas.getContext('2d');
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$#@%&*(){}[]<>/\\|';
+            const columns = Math.floor(canvas.width / 15);
+            const drops = [];
+            
+            for (let i = 0; i < columns; i++) {
+                drops[i] = Math.random() * -100;
+            }
+            
+            function draw() {
+                ctx.fillStyle = 'rgba(10, 25, 47, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = '#00b0ff';
+                ctx.font = '15px monospace';
+                
+                for (let i = 0; i < drops.length; i++) {
+                    const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                    ctx.fillText(text, i * 15, drops[i] * 15);
+                    
+                    if (drops[i] * 15 > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    
+                    drops[i]++;
+                }
+            }
+            
+            setInterval(draw, 50);
+        }
+        
+        createMatrixRain();
+        
+        // Simulate typing effect
+        const terminalElements = document.querySelectorAll('.terminal-text');
+        terminalElements.forEach(el => {
+            const text = el.textContent;
+            el.textContent = '';
+            let i = 0;
+            
+            function typeWriter() {
+                if (i < text.length) {
+                    el.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, Math.random() * 50 + 50);
+                }
+            }
+            
+            setTimeout(() => {
+                typeWriter();
+            }, 1000);
+        });
+    </script>
 </body>
 </html>
