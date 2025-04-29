@@ -609,19 +609,19 @@
     <div class="container">
         <nav>
             <a href="index.html" class="logo">
-                <i class="fas fa-shield-alt"></i> Security_Profile
+                <i class="fas fa-shield-alt"></i> Ahmed Abd Portfolio
             </a>
             <div class="nav-links">
-                <a href="index.html" class="nav-link">Home</a>
+                <a href="https://bohmiiidd.github.io" class="nav-link">Home</a>
                 <a href="offsec.html" class="nav-link">OffSec</a>
                 <a href="projects.html" class="nav-link">Projects</a>
-                <a href="#" class="nav-link">Blog</a>
-                <a href="#" class="nav-link">Contact</a>
+                <a href="blog.html" class="nav-link">Blog</a>
+                <a href="contact.html" class="nav-link">Contact</a>
             </div>
         </nav>
 
         <header class="header">
-            <h1>&lt;Offensive_Security&gt;</h1>
+            <h1>Offensive_Security</h1>
             <p>My collection of custom CTF challenges, vulnerable machines, and detailed writeups. Explore the methodologies, techniques, and tools used to exploit vulnerabilities in controlled environments.</p>
         </header>
 
@@ -648,23 +648,23 @@
             <!-- Machine 1 -->
             <div class="machine-card">
                 <div class="machine-header">
-                    <h3 class="machine-title">CyberNexus</h3>
-                    <span class="machine-difficulty difficulty-medium">Medium</span>
+                    <h3 class="machine-title">Lobby</h3>
+                    <span class="machine-difficulty difficulty-medium">Easy</span>
                 </div>
                 <div class="machine-content">
                     <div class="machine-description">
-                        A vulnerable web application with multiple entry points. Features SQL injection, file upload vulnerabilities, and a custom remote code execution exploit chain.
+                        A vulnerable web application with multiple entry points. Features Path traversal injection, file upload vulnerabilities, and a custom remote code execution exploit chain.
                     </div>
                     <div class="machine-tags">
                         <span class="tag">Web App</span>
-                        <span class="tag">SQL Injection</span>
+                        <span class="tag">Enumeration</span>
                         <span class="tag">File Upload</span>
-                        <span class="tag">RCE</span>
+                        <span class="tag">PHP</span>
                     </div>
                 </div>
                 <div class="machine-footer">
                     <span class="machine-date">Released: March 15, 2025</span>
-                    <a href="writeups/cybernexus_full_writeup.pdf" class="machine-link">Download PDF</a>
+                    <a href="writeups/lobby.pdf" class="machine-link">Download PDF</a>
                 </div>
             </div>
 
@@ -793,19 +793,19 @@
 
         <div class="featured-writeup" id="cybernexus">
             <div class="featured-header">
-                <h2>Featured Writeup: CyberNexus</h2>
+                <h2>latest Writeup: low</h2>
             </div>
             <div class="writeup-terminal">
                 <div class="writeup-content">
                     <h3>Writeup Overview</h3>
-                    <p>This challenge involved exploiting multiple vulnerabilities in a web application to achieve remote code execution and gain root access.</p>
+                    <p>This challenge involved exploiting simple buffer overflow vulnerability to achieve remote code execution then exploit misconfiguration and outdate libc to gain root access.</p>
                     
                     <p>Key vulnerabilities exploited:</p>
                     <ul style="margin-left: 20px; color: var(--text-blue); list-style-type: none;">
-                        <li><i class="fas fa-angle-right" style="color: var(--accent-blue); margin-right: 10px;"></i>SQL Injection in the login form</li>
-                        <li><i class="fas fa-angle-right" style="color: var(--accent-blue); margin-right: 10px;"></i>File upload vulnerability allowing PHP execution</li>
-                        <li><i class="fas fa-angle-right" style="color: var(--accent-blue); margin-right: 10px;"></i>Path traversal in the admin panel</li>
-                        <li><i class="fas fa-angle-right" style="color: var(--accent-blue); margin-right: 10px;"></i>Kernel exploit for privilege escalation</li>
+                        <li><i class="fas fa-angle-right" style="color: var(--accent-blue); margin-right: 10px;"></i>Buffer overflow with no security</li>
+                        <li><i class="fas fa-angle-right" style="color: var(--accent-blue); margin-right: 10px;"></i>Manipulate Linux environement variable to Exploit another BOF </li>
+                        <li><i class="fas fa-angle-right" style="color: var(--accent-blue); margin-right: 10px;"></i>Hard Enumeration </li>
+                        <li><i class="fas fa-angle-right" style="color: var(--accent-blue); margin-right: 10px;"></i>Glibc exploit for privilege escalation</li>
                     </ul>
                     
                     <p>The full step-by-step writeup is available as a PDF document which includes all commands, code snippets, and screenshots of the exploitation process.</p>
@@ -815,7 +815,7 @@
                             <i class="fas fa-file-pdf" style="margin-right: 10px;"></i>Download Full Writeup PDF
                         </a>
                         <a href="files/cybernexus_machine.ova" class="machine-link" style="padding: 0.8rem 1.5rem;">
-                            <i class="fas fa-download" style="margin-right: 10px;"></i>Download VM Image
+                            <i class="fas fa-download" style="margin-right: 10px;"></i>Download Full Docker image
                         </a>
                     </div>
                 </div>
