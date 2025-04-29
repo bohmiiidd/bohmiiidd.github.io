@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offensive Security | CTFs & Writeups</title>
+    <style>
+        :root {
+            --primary-blue: #0a192f;
+            --secondary-blue: #172a45;
+            --accent-blue: #64ffda;
+            --text-blue: #8892b0;
+            --bright-blue: #00b0ff;
+            --light-blue: #4dfcff;
+            --danger-red: #ff5370;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+
+        body {
+            background-color: var(--primary-blue);
+            color: #e0e0e0;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(
+                rgba(10, 25, 47, 0.7),
+                rgba(10, 25, 47, 0.9)
+            ), 
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 800 800'%3E%3Cg fill='none' stroke='%23172a45' stroke-width='1'%3E%3Cpath d='M769 229L1037 260.9M927 880L731 737 520 660 309 538 40 599 295 764 126.5 879.5 40 599-197 493 102 382-31 229 126.5 79.5-69-63'/%3E%3Cpath d='M-31 229L237 261 390 382 603 493 308.5 537.5 101.5 381.5M370 905L295 764'/%3E%3Cpath d='M520 660L578 842 731 737 840 599 603 493 520 660 295 764 309 538 390 382 539 269 769 229 577.5 41.5 370 105 295 -36 126.5 79.5 237 261 102 382 40 599 -69 737 127 880'/%3E%3Cpath d='M520-140L578.5 42.5 731-63M603 493L539 269 237 261 370 105M902 382L539 269M390 382L102 382'/%3E%3Cpath d='M-222 42L126.5 79.5 370 105 539 269 577.5 41.5 927 80 769 229 902 382 603 493 731 737M295-36L577.5 41.5M578 842L295 764M40-201L127 80M102 382L-261 269'/%3E%3C/g%3E%3C/svg%3E");
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--text-blue);
+            text-decoration: none;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-blue);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-blue);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px var(--bright-blue), 0 0 20px rgba(0, 176, 255, 0.5);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: var(--text-blue);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .terminal-section {
+            position: relative;
+            padding: 1.5rem;
+            background-color: rgba(23, 42, 69, 0.8);
+            border: 1px solid var(--accent-blue);
+            border-radius: 5px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 10px var(--accent-blue);
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 0.5rem;
+            margin-right: 1rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot.red {
+            background-color: #ff5f56;
+        }
+
+        .dot.yellow {
+            background-color: #ffbd2e;
+        }
+
+        .dot.green {
+            background-color: #27c93f;
+        }
+
+        .terminal-title {
+            color: var(--accent-blue);
+            font-size: 0.9rem;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .machine-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .machine-card {
+            background-color: rgba(23, 42, 69, 0.8);
+            border: 1px solid var(--accent-blue);
+            border-radius: 5px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+        }
+
+        .machine-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 15px var(--accent-blue);
+        }
+
+        .machine-card::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, var(--accent-blue), var(--bright-blue));
+            top: 0;
+            left: 0;
+        }
+
+        .machine-header {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .machine-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--bright-blue);
+        }
+
+        .machine-difficulty {
+            font-size: 0.8rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 3px;
+        }
+
+        .difficulty-easy {
+            background-color: rgba(39, 201, 63, 0.2);
+            color: #27c93f;
+            border: 1px solid #27c93f;
+        }
+
+        .difficulty-medium {
+            background-color: rgba(255, 189, 46, 0.2);
+            color: #ffbd2e;
+            border: 1px solid #ffbd2e;
+        }
+
+        .difficulty-hard {
+            background-color: rgba(255, 95, 86, 0.2);
+            color: #ff5f56;
+            border: 1px solid #ff5f56;
+        }
+
+        .difficulty-insane {
+            background-color: rgba(255, 0, 0, 0.2);
+            color: #ff0000;
+            border: 1px solid #ff0000;
+        }
+
+        .machine-content {
+            padding: 1rem;
+        }
+
+        .machine-description {
+            color: var(--text-blue);
+            margin-bottom: 1rem;
+            max-height: 100px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .machine-description::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30px;
+            background: linear-gradient(to bottom, transparent, rgba(23, 42, 69, 0.9));
+        }
+
+        .machine-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            font-size: 0.8rem;
+            padding: 0.2rem 0.5rem;
+            background-color: rgba(100, 255, 218, 0.1);
+            color: var(--accent-blue);
+            border-radius: 3px;
+            border: 1px solid rgba(100, 255, 218, 0.3);
+        }
+
+        .machine-footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            border-top: 1px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .machine-date {
+            font-size: 0.8rem;
+            color: var(--text-blue);
+        }
+
+        .machine-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: transparent;
+            border: 1px solid var(--accent-blue);
+            border-radius: 4px;
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .machine-link:hover {
+            background-color: rgba(100, 255, 218, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .machine-link::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(100, 255, 218, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .machine-link:hover::before {
+            left: 100%;
+        }
+
+        .featured-writeup {
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.9s backwards;
+        }
+
+        .featured-header {
+            position: relative;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .featured-header h2 {
+            font-size: 1.8rem;
+            color: var(--bright-blue);
+        }
+
+        .featured-header::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(to right, var(--accent-blue), transparent);
+        }
+
+        .writeup-terminal {
+            background-color: rgba(10, 25, 47, 0.9);
+            border: 1px solid var(--accent-blue);
+            border-radius: 5px;
+            padding: 1.5rem;
+            color: #e0e0e0;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 10px var(--accent-blue);
+        }
+
+        .writeup-content {
+            margin-bottom: 1.5rem;
+        }
+
+        .writeup-content h3 {
+            color: var(--bright-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .writeup-content p {
+            margin-bottom: 1rem;
+            color: var(--text-blue);
+        }
+
+        .shell-command {
+            background-color: rgba(23, 42, 69, 0.8);
+            padding: 0.5rem 1rem;
+            border-radius: 3px;
+            margin: 0.5rem 0;
+            font-family: 'Courier New', monospace;
+            position: relative;
+            border-left: 3px solid var(--accent-blue);
+        }
+
+        .shell-command::before {
+            content: "$";
+            color: var(--accent-blue);
+            margin-right: 0.5rem;
+        }
+
+        .shell-output {
+            background-color: rgba(23, 42, 69, 0.5);
+            padding: 0.5rem 1rem;
+            border-radius: 3px;
+            margin: 0.5rem 0;
+            font-family: 'Courier New', monospace;
+            color: var(--text-blue);
+        }
+
+        .code-block {
+            background-color: rgba(23, 42, 69, 0.8);
+            padding: 1rem;
+            border-radius: 3px;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            position: relative;
+            border-left: 3px solid var(--accent-blue);
+            overflow-x: auto;
+        }
+
+        .read-more {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: transparent;
+            border: 1px solid var(--accent-blue);
+            border-radius: 4px;
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .read-more:hover {
+            background-color: rgba(100, 255, 218, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 5px var(--accent-blue);
+        }
+
+        .read-more::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(100, 255, 218, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .read-more:hover::before {
+            left: 100%;
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            background-color: transparent;
+            border: 1px solid var(--accent-blue);
+            border-radius: 4px;
+            color: var(--accent-blue);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: rgba(100, 255, 218, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background-color: rgba(100, 255, 218, 0.2);
+            border-color: var(--bright-blue);
+            color: var(--bright-blue);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            animation: fadeInUp 1s ease-out 1.2s backwards;
+        }
+
+        .page-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(23, 42, 69, 0.8);
+            border: 1px solid var(--accent-blue);
+            border-radius: 4px;
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .page-link:hover, .page-link.active {
+            background-color: rgba(100, 255, 218, 0.1);
+            color: var(--bright-blue);
+        }
+
+        .page-link.active {
+            background-color: rgba(100, 255, 218, 0.2);
+            border-color: var(--bright-blue);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 255, 218, 0.2);
+            color: var(--text-blue);
+            font-size: 0.9rem;
+            animation: fadeInUp 1s ease-out 1.5s backwards;
+        }
+
+        .footer a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .terminal-cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background-color: var(--accent-blue);
+            margin-left: 5px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scanline {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(100%);
+            }
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .machine-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .filters {
+                justify-content: center;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="index.html" class="logo">
+                <i class="fas fa-shield-alt"></i> Security_Profile
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="offsec.html" class="nav-link">OffSec</a>
+                <a href="projects.html" class="nav-link">Projects</a>
+                <a href="#" class="nav-link">Blog</a>
+                <a href="#" class="nav-link">Contact</a>
+            </div>
+        </nav>
+
+        <header class="header">
+            <h1>&lt;Offensive_Security&gt;</h1>
+            <p>My collection of custom CTF challenges, vulnerable machines, and detailed writeups. Explore the methodologies, techniques, and tools used to exploit vulnerabilities in controlled environments.</p>
+        </header>
+
+        <div class="terminal-section">
+            <div class="terminal-header">
+                <div class="terminal-dots">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                </div>
+                <div class="terminal-title">~ ./offensive_security.sh</div>
+            </div>
+            <div class="filters">
+                <button class="filter-btn active">All Machines</button>
+                <button class="filter-btn">Web Exploitation</button>
+                <button class="filter-btn">Binary Exploitation</button>
+                <button class="filter-btn">Privilege Escalation</button>
+                <button class="filter-btn">Network</button>
+                <button class="filter-btn">Cryptography</button>
+            </div>
+        </div>
+
+        <div class="machine-grid">
+            <!-- Machine 1 -->
+            <div class="machine-card">
+                <div class="machine-header">
+                    <h3 class="machine-title">CyberNexus</h3>
+                    <span class="machine-difficulty difficulty-medium">Medium</span>
+                </div>
+                <div class="machine-content">
+                    <div class="machine-description">
+                        A vulnerable web application with multiple entry points. Features SQL injection, file upload vulnerabilities, and a custom remote code execution exploit chain.
+                    </div>
+                    <div class="machine-tags">
+                        <span class="tag">Web App</span>
+                        <span class="tag">SQL Injection</span>
+                        <span class="tag">File Upload</span>
+                        <span class="tag">RCE</span>
+                    </div>
+                </div>
+                <div class="machine-footer">
+                    <span class="machine-date">Released: March 15, 2025</span>
+                    <a href="#cybernexus" class="machine-link">View Writeup</a>
+                </div>
+            </div>
+
+            <!-- Machine 2 -->
+            <div class="machine-card">
+                <div class="machine-header">
+                    <h3 class="machine-title">DataVault</h3>
+                    <span class="machine-difficulty difficulty-hard">Hard</span>
+                </div>
+                <div class="machine-content">
+                    <div class="machine-description">
+                        A secure storage system with multiple layers of authentication. Requires exploiting a SSRF vulnerability to access internal services and leverage a kernel exploit for privilege escalation.
+                    </div>
+                    <div class="machine-tags">
+                        <span class="tag">SSRF</span>
+                        <span class="tag">API Exploitation</span>
+                        <span class="tag">Kernel Exploit</span>
+                        <span class="tag">Pivoting</span>
+                    </div>
+                </div>
+                <div class="machine-footer">
+                    <span class="machine-date">Released: January 27, 2025</span>
+                    <a href="#datavault" class="machine-link">View Writeup</a>
+                </div>
+            </div>
+
+            <!-- Machine 3 -->
+            <div class="machine-card">
+                <div class="machine-header">
+                    <h3 class="machine-title">BinaryFortress</h3>
+                    <span class="machine-difficulty difficulty-insane">Insane</span>
+                </div>
+                <div class="machine-content">
+                    <div class="machine-description">
+                        A binary exploitation challenge focusing on advanced heap exploitation techniques. Features custom binary protections and requires developing a sophisticated ROP chain.
+                    </div>
+                    <div class="machine-tags">
+                        <span class="tag">Binary Exploitation</span>
+                        <span class="tag">Heap Overflow</span>
+                        <span class="tag">ROP</span>
+                        <span class="tag">Format String</span>
+                    </div>
+                </div>
+                <div class="machine-footer">
+                    <span class="machine-date">Released: April 10, 2025</span>
+                    <a href="#binaryfortress" class="machine-link">View Writeup</a>
+                </div>
+            </div>
+
+            <!-- Machine 4 -->
+            <div class="machine-card">
+                <div class="machine-header">
+                    <h3 class="machine-title">NetRunner</h3>
+                    <span class="machine-difficulty difficulty-easy">Easy</span>
+                </div>
+                <div class="machine-content">
+                    <div class="machine-description">
+                        A beginner-friendly network exploitation challenge. Features misconfigured services, weak credentials, and basic privilege escalation vectors. Perfect for those starting their security journey.
+                    </div>
+                    <div class="machine-tags">
+                        <span class="tag">Network</span>
+                        <span class="tag">Enumeration</span>
+                        <span class="tag">Weak Credentials</span>
+                        <span class="tag">Linux PrivEsc</span>
+                    </div>
+                </div>
+                <div class="machine-footer">
+                    <span class="machine-date">Released: February 8, 2025</span>
+                    <a href="#netrunner" class="machine-link">View Writeup</a>
+                </div>
+            </div>
+
+            <!-- Machine 5 -->
+            <div class="machine-card">
+                <div class="machine-header">
+                    <h3 class="machine-title">CryptoLock</h3>
+                    <span class="machine-difficulty difficulty-medium">Medium</span>
+                </div>
+                <div class="machine-content">
+                    <div class="machine-description">
+                        A cryptography-focused challenge that requires breaking various encryption schemes. Features custom implementations with subtle flaws and a ransomware simulation environment.
+                    </div>
+                    <div class="machine-tags">
+                        <span class="tag">Cryptography</span>
+                        <span class="tag">RSA</span>
+                        <span class="tag">AES</span>
+                        <span class="tag">Hash Cracking</span>
+                    </div>
+                </div>
+                <div class="machine-footer">
+                    <span class="machine-date">Released: March 3, 2025</span>
+                    <a href="#cryptolock" class="machine-link">View Writeup</a>
+                </div>
+            </div>
+
+            <!-- Machine 6 -->
+            <div class="machine-card">
+                <div class="machine-header">
+                    <h3 class="machine-title">GitRecon</h3>
+                    <span class="machine-difficulty difficulty-medium">Medium</span>
+                </div>
+                <div class="machine-content">
+                    <div class="machine-description">
+                        A challenge focused on git repository reconnaissance. Requires extracting sensitive information from commit history, finding exposed credentials, and leveraging DevOps misconfigurations.
+                    </div>
+                    <div class="machine-tags">
+                        <span class="tag">Git</span>
+                        <span class="tag">OSINT</span>
+                        <span class="tag">CI/CD</span>
+                        <span class="tag">Sensitive Data</span>
+                    </div>
+                </div>
+                <div class="machine-footer">
+                    <span class="machine-date">Released: April 22, 2025</span>
+                    <a href="#gitrecon" class="machine-link">View Writeup</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pagination">
+            <a href="#" class="page-link active">1</a>
+            <a href="#" class="page-link">2</a>
+            <a href="#" class="page-link">3</a>
+            <a href="#" class="page-link"><i class="fas fa-chevron-right"></i></a>
+        </div>
+
+        <div class="featured-writeup" id="cybernexus">
+            <div class="featured-header">
+                <h2>Featured Writeup: CyberNexus</h2>
+            </div>
+            <div class="writeup-terminal">
+                <div class="writeup-content">
+                    <h3>[1] Reconnaissance</h3>
+                    <p>Initial reconnaissance revealed a web application running on port 80. Let's start with a comprehensive port scan to identify all available services.</p>
+                    
+                    <div class="shell-command">nmap -sC -sV -p- -oA cybernexus 10.10.10.X</div>
+                    
+                    <div class="shell-output">
+                        PORT&nbsp;&nbsp;&nbsp;&nbsp;STATE SERVICE&nbsp;&nbsp;&nbsp;VERSION<br>
+                        22/tcp&nbsp;&nbsp;open&nbsp;ssh&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OpenSSH 8.4p1<br>
+                        80/tcp&nbsp;&nbsp;open&nbsp;http&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apache 2.4.49<br>
+                        443/tcp&nbsp;open&nbsp;https&nbsp;&nbsp;&nbsp;&nbsp;Apache 2.4.49<br>
+                        8080/tcp open&nbsp;http-proxy Jenkins 2.303.1
+                    </div>
+                    
+                    <p>The scan revealed multiple services including SSH, HTTP, HTTPS, and a Jenkins instance on port 8080. The Apache version 2.4.49 is particularly interesting as it's vulnerable to path traversal and RCE (CVE-2021-41773).</p>
+
+                    <h3>[2] Web Application Discovery</h3>
+                    <p>Using directory enumeration tools, I discovered several
