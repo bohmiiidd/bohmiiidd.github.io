@@ -664,7 +664,7 @@
                 </div>
                 <div class="machine-footer">
                     <span class="machine-date">Released: March 15, 2025</span>
-                    <a href="#cybernexus" class="machine-link">View Writeup</a>
+                    <a href="writeups/cybernexus_full_writeup.pdf" class="machine-link">Download PDF</a>
                 </div>
             </div>
 
@@ -687,7 +687,7 @@
                 </div>
                 <div class="machine-footer">
                     <span class="machine-date">Released: January 27, 2025</span>
-                    <a href="#datavault" class="machine-link">View Writeup</a>
+                    <a href="writeups/datavault_full_writeup.pdf" class="machine-link">Download PDF</a>
                 </div>
             </div>
 
@@ -710,7 +710,7 @@
                 </div>
                 <div class="machine-footer">
                     <span class="machine-date">Released: April 10, 2025</span>
-                    <a href="#binaryfortress" class="machine-link">View Writeup</a>
+                    <a href="writeups/binaryfortress_full_writeup.pdf" class="machine-link">Download PDF</a>
                 </div>
             </div>
 
@@ -733,7 +733,7 @@
                 </div>
                 <div class="machine-footer">
                     <span class="machine-date">Released: February 8, 2025</span>
-                    <a href="#netrunner" class="machine-link">View Writeup</a>
+                    <a href="writeups/netrunner_full_writeup.pdf" class="machine-link">Download PDF</a>
                 </div>
             </div>
 
@@ -756,7 +756,7 @@
                 </div>
                 <div class="machine-footer">
                     <span class="machine-date">Released: March 3, 2025</span>
-                    <a href="#cryptolock" class="machine-link">View Writeup</a>
+                    <a href="writeups/cryptolock_full_writeup.pdf" class="machine-link">Download PDF</a>
                 </div>
             </div>
 
@@ -779,7 +779,7 @@
                 </div>
                 <div class="machine-footer">
                     <span class="machine-date">Released: April 22, 2025</span>
-                    <a href="#gitrecon" class="machine-link">View Writeup</a>
+                    <a href="writeups/gitrecon_full_writeup.pdf" class="machine-link">Download PDF</a>
                 </div>
             </div>
         </div>
@@ -797,20 +797,27 @@
             </div>
             <div class="writeup-terminal">
                 <div class="writeup-content">
-                    <h3>[1] Reconnaissance</h3>
-                    <p>Initial reconnaissance revealed a web application running on port 80. Let's start with a comprehensive port scan to identify all available services.</p>
+                    <h3>Writeup Overview</h3>
+                    <p>This challenge involved exploiting multiple vulnerabilities in a web application to achieve remote code execution and gain root access.</p>
                     
-                    <div class="shell-command">nmap -sC -sV -p- -oA cybernexus 10.10.10.X</div>
+                    <p>Key vulnerabilities exploited:</p>
+                    <ul style="margin-left: 20px; color: var(--text-blue); list-style-type: none;">
+                        <li><i class="fas fa-angle-right" style="color: var(--accent-blue); margin-right: 10px;"></i>SQL Injection in the login form</li>
+                        <li><i class="fas fa-angle-right" style="color: var(--accent-blue); margin-right: 10px;"></i>File upload vulnerability allowing PHP execution</li>
+                        <li><i class="fas fa-angle-right" style="color: var(--accent-blue); margin-right: 10px;"></i>Path traversal in the admin panel</li>
+                        <li><i class="fas fa-angle-right" style="color: var(--accent-blue); margin-right: 10px;"></i>Kernel exploit for privilege escalation</li>
+                    </ul>
                     
-                    <div class="shell-output">
-                        PORT&nbsp;&nbsp;&nbsp;&nbsp;STATE SERVICE&nbsp;&nbsp;&nbsp;VERSION<br>
-                        22/tcp&nbsp;&nbsp;open&nbsp;ssh&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OpenSSH 8.4p1<br>
-                        80/tcp&nbsp;&nbsp;open&nbsp;http&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apache 2.4.49<br>
-                        443/tcp&nbsp;open&nbsp;https&nbsp;&nbsp;&nbsp;&nbsp;Apache 2.4.49<br>
-                        8080/tcp open&nbsp;http-proxy Jenkins 2.303.1
+                    <p>The full step-by-step writeup is available as a PDF document which includes all commands, code snippets, and screenshots of the exploitation process.</p>
+                    
+                    <div style="display: flex; justify-content: center; margin-top: 20px;">
+                        <a href="writeups/cybernexus_full_writeup.pdf" class="machine-link" style="padding: 0.8rem 1.5rem; margin-right: 15px;">
+                            <i class="fas fa-file-pdf" style="margin-right: 10px;"></i>Download Full Writeup PDF
+                        </a>
+                        <a href="files/cybernexus_machine.ova" class="machine-link" style="padding: 0.8rem 1.5rem;">
+                            <i class="fas fa-download" style="margin-right: 10px;"></i>Download VM Image
+                        </a>
                     </div>
-                    
-                    <p>The scan revealed multiple services including SSH, HTTP, HTTPS, and a Jenkins instance on port 8080. The Apache version 2.4.49 is particularly interesting as it's vulnerable to path traversal and RCE (CVE-2021-41773).</p>
-
-                    <h3>[2] Web Application Discovery</h3>
-                    <p>Using directory enumeration tools, I discovered several
+                </div>
+            </div>
+        </div>
