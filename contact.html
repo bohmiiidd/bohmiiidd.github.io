@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact - Ahmed Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-papLF2T7RixE+h3+gFZ6ZDy1iJ3B5NMCLE1sX3OAj1XkG9MNDUdyYvIvDCqdc8E9x+rBm8xjS37p9YtLrXZwlA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background-color: #121212;
+      color: #ccc;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 220px;
+      background-color: #111;
+      color: #ccc;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+    }
+
+    .sidebar h2 {
+      margin-bottom: 40px;
+      font-size: 26px;
+      font-weight: 700;
+    }
+
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .sidebar nav a {
+      color: #888;
+      text-decoration: none;
+      padding: 8px;
+      border-radius: 6px;
+    }
+
+    .sidebar nav a:hover,
+    .sidebar nav a.active {
+      background-color: #333;
+      color: #fff;
+    }
+
+    .content {
+      margin-left: 220px;
+      flex: 1;
+      padding: 60px 40px;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 30px;
+      color: #eee;
+    }
+
+    .contact-info {
+      margin-bottom: 40px;
+    }
+
+    .contact-info a {
+      display: flex;
+      align-items: center;
+      color: #ccc;
+      margin-bottom: 10px;
+      text-decoration: none;
+    }
+
+    .contact-info a i {
+      margin-right: 10px;
+      color: #888;
+    }
+
+    .contact-info a:hover {
+      color: #fff;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 500px;
+    }
+
+    input, textarea {
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      background: #1e1e1e;
+      color: #ccc;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    button {
+      padding: 10px;
+      border: none;
+      background: #444;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #666;
+    }
+
+    footer {
+      margin-top: 60px;
+      font-size: 14px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <h2>Portfolio</h2>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="machines.html">Machines</a>
+      <a href="certificates.html">Certificates</a>
+      <a href="blog.html">Blog</a>
+      <a href="notes.html">Notes</a>
+      <a href="experience.html">Experience</a>
+      <a href="contact.html" class="active">Contact</a>
+      <a href="events.html">Events</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <h1>Contact Me</h1>
+    <div class="contact-info">
+      <a href="mailto:ahmed@example.com"><i class="fas fa-envelope"></i> ahmed@example.com</a>
+      <a href="https://www.linkedin.com/in/ahmed" target="_blank"><i class="fab fa-linkedin"></i> linkedin.com/in/ahmed</a>
+    </div>
+
+    <form action="mailto:ahmed@example.com" method="POST" enctype="text/plain">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+
+    <footer>© 2025 Ahmed. All rights reserved.</footer>
+  </main>
+</body>
+</html>
