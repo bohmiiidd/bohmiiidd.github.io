@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Machines | Ahmed's Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      margin: 0;
+      padding: 0;
+      background-color: #121212;
+      color: #ccc;
+      display: flex;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Canvas background */
+    canvas#bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      background-color: #121212;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      background-color: #111;
+      color: #ccc;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+    }
+
+    .sidebar h2 {
+      margin-bottom: 40px;
+      font-size: 26px;
+      font-weight: 700;
+      color: #ccc;
+      letter-spacing: 2px;
+    }
+
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .sidebar nav a {
+      color: #888;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 15px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .sidebar nav a:hover,
+    .sidebar nav a.active {
+      color: #ccc;
+      background-color: #333;
+    }
+
+    /* Main content */
+    main.main {
+      margin-left: 220px;
+      padding: 40px 30px;
+      flex: 1;
+      max-width: calc(100% - 220px);
+    }
+
+    main.main h1 {
+      font-size: 36px;
+      margin-bottom: 30px;
+      color: #ddd;
+      letter-spacing: 1.5px;
+    }
+
+    .machine {
+      background: #1e1e1e;
+      border-radius: 8px;
+      padding: 20px 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
+      transition: background-color 0.3s;
+    }
+    .machine:hover {
+      background-color: #2a2a2a;
+    }
+
+    .machine h3 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #eee;
+    }
+
+    .machine ul {
+      list-style-type: none;
+      margin-bottom: 15px;
+      font-size: 15px;
+      color: #bbb;
+    }
+
+    .machine ul li strong {
+      color: #ccc;
+    }
+
+    .machine a {
+      display: inline-block;
+      margin-bottom: 15px;
+      color: #aaa;
+      font-size: 14px;
+      text-decoration: underline;
+      transition: color 0.3s;
+    }
+
+    .machine a:hover {
+      color: #ccc;
+    }
+
+    .machine .conclusion {
+      font-size: 14px;
+      color: #999;
+      font-style: italic;
+      line-height: 1.4;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Canvas background -->
+  <canvas id="bg"></canvas>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>Ahmed</h2>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="machines.html" class="active">Machines</a>
+      <a href="certificates.html">Certificates</a>
+      <a href="blog.html">Blog</a>
+      <a href="notes.html">Notes</a>
+      <a href="experience.html">Experience</a>
+      <a href="contact.html">Contact</a>
+      <a href="events.html">Events</a>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <main class="main">
+    <h1>Machines</h1>
+
+    <div class="machine">
+      <h3>Machine 1: StealthyFox</h3>
+      <ul>
+        <li><strong>Topics:</strong> Privilege Escalation, SUID, Cron Jobs</li>
+        <li><strong>Technologies:</strong> Linux, Bash</li>
+      </ul>
+      <a href="writeups/stealthyfox.pdf" target="_blank" rel="noopener noreferrer">View PDF Write-Up</a>
+      <p class="conclusion">
+        This machine demonstrated the use of misconfigured scheduled tasks for local privilege escalation.
+      </p>
+    </div>
+
+    <div class="machine">
+      <h3>Machine 2: WebVault</h3>
+      <ul>
+        <li><strong>Topics:</strong> SQL Injection, LFI, Reverse Shell</li>
+        <li><strong>Technologies:</strong> PHP, MySQL, Apache</li>
+      </ul>
+      <a href="writeups/webvault.pdf" target="_blank" rel="noopener noreferrer">View PDF Write-Up</a>
+      <p class="conclusion">
+        WebVault teaches classic web exploitation techniques that are still prevalent in real-world applications.
+      </p>
+    </div>
+
+  </main>
+
+  <!-- Background animation script -->
+  <script>
+    const canvas = document.getElementById('bg');
+    const ctx = canvas.getContext('2d');
+
+    let width, height;
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    const lines = [];
+    for (let i = 0; i < 80; i++) {
+      lines.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        length: Math.random() * 100 + 20,
+        speed: Math.random() * 0.5 + 0.2,
+        opacity: Math.random() * 0.15 + 0.02
+      });
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      lines.forEach(line => {
+        ctx.beginPath();
+        ctx.moveTo(line.x, line.y);
+        ctx.lineTo(line.x, line.y + line.length);
+        ctx.strokeStyle = `rgba(200, 200, 200, ${line.opacity})`;
+        ctx.stroke();
+        line.y += line.speed;
+        if (line.y > height) {
+          line.y = -line.length;
+          line.x = Math.random() * width;
+        }
+      });
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+
+</body>
+</html>
