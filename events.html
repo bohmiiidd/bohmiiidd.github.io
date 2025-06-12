@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Events - Ahmed Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background-color: #121212;
+      color: #ccc;
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 220px;
+      background-color: #111;
+      color: #ccc;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: fixed;
+      top: 0; bottom: 0; left: 0;
+    }
+    .sidebar h2 {
+      margin-bottom: 40px;
+      font-size: 26px;
+      font-weight: 700;
+    }
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+    }
+    .sidebar nav a {
+      color: #888;
+      text-decoration: none;
+      padding: 8px;
+      border-radius: 6px;
+    }
+    .sidebar nav a:hover,
+    .sidebar nav a.active {
+      background-color: #333;
+      color: #fff;
+    }
+    .content {
+      margin-left: 220px;
+      flex: 1;
+      padding: 40px 50px;
+      overflow-y: auto;
+      max-height: 100vh;
+    }
+    h1 {
+      font-size: 32px;
+      margin-bottom: 30px;
+      color: #eee;
+    }
+    .event {
+      background: #1e1e1e;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 40px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.7);
+    }
+    .event h2 {
+      margin-bottom: 20px;
+      color: #ddd;
+    }
+    .images {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .images img {
+      width: 48%;
+      border-radius: 8px;
+      object-fit: cover;
+      box-shadow: 0 0 8px rgba(0,0,0,0.5);
+      height: 180px;
+    }
+    .text-group {
+      margin-bottom: 15px;
+    }
+    .text-group strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #bbb;
+      font-size: 16px;
+    }
+    .text-group p {
+      line-height: 1.5;
+      font-size: 15px;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <h2>Portfolio</h2>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="machines.html">Machines</a>
+      <a href="certificates.html">Certificates</a>
+      <a href="blog.html">Blog</a>
+      <a href="notes.html">Notes</a>
+      <a href="experience.html">Experience</a>
+      <a href="contact.html">Contact</a>
+      <a href="events.html" class="active">Events</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <h1>Events</h1>
+
+    <section class="event">
+      <h2>Cybersecurity Workshop 2024</h2>
+      <div class="images">
+        <img src="images/event1a.jpg" alt="Cybersecurity Workshop Image 1" />
+        <img src="images/event1b.jpg" alt="Cybersecurity Workshop Image 2" />
+      </div>
+      <div class="text-group">
+        <strong>Introduction:</strong>
+        <p>This workshop focused on the latest cybersecurity techniques and tools for penetration testing and vulnerability assessment.</p>
+      </div>
+      <div class="text-group">
+        <strong>Objective:</strong>
+        <p>To train participants in advanced security auditing and ethical hacking skills.</p>
+      </div>
+      <div class="text-group">
+        <strong>Authors:</strong>
+        <p>Ahmed, Sarah Alami, John Doe</p>
+      </div>
+      <div class="text-group">
+        <strong>My Function:</strong>
+        <p>Lead instructor and organizer for the hands-on penetration testing sessions.</p>
+      </div>
+      <div class="text-group">
+        <strong>What I Did:</strong>
+        <p>Designed curriculum, delivered lectures, and conducted live hacking demos.</p>
+      </div>
+    </section>
+
+    <section class="event">
+      <h2>Open Source Security Conference</h2>
+      <div class="images">
+        <img src="images/event2a.jpg" alt="Open Source Security Conference Image 1" />
+        <img src="images/event2b.jpg" alt="Open Source Security Conference Image 2" />
+      </div>
+      <div class="text-group">
+        <strong>Introduction:</strong>
+        <p>A conference gathering security professionals to discuss open source tools and their impact on cybersecurity.</p>
+      </div>
+      <div class="text-group">
+        <strong>Objective:</strong>
+        <p>To promote open source security tools and foster collaboration among developers and researchers.</p>
+      </div>
+      <div class="text-group">
+        <strong>Authors:</strong>
+        <p>Ahmed, Lisa Wang, Michael Smith</p>
+      </div>
+      <div class="text-group">
+        <strong>My Function:</strong>
+        <p>Panelist discussing community-driven security projects and tool development.</p>
+      </div>
+      <div class="text-group">
+        <strong>What I Did:</strong>
+        <p>Presented case studies, answered audience questions, and networked with other security experts.</p>
+      </div>
+    </section>
+
+    <section class="event">
+      <h2>Hackathon Tunisia 2023</h2>
+      <div class="images">
+        <img src="images/event3a.jpg" alt="Hackathon Tunisia Image 1" />
+        <img src="images/event3b.jpg" alt="Hackathon Tunisia Image 2" />
+      </div>
+      <div class="text-group">
+        <strong>Introduction:</strong>
+        <p>An intense 48-hour hackathon where teams compete to build innovative security solutions.</p>
+      </div>
+      <div class="text-group">
+        <strong>Objective:</strong>
+        <p>To encourage innovation in cybersecurity and foster teamwork among participants.</p>
+      </div>
+      <div class="text-group">
+        <strong>Authors:</strong>
+        <p>Ahmed, Team Red</p>
+      </div>
+      <div class="text-group">
+        <strong>My Function:</strong>
+        <p>Team leader and developer focusing on secure app design.</p>
+      </div>
+      <div class="text-group">
+        <strong>What I Did:</strong>
+        <p>Led brainstorming sessions, coded critical modules, and handled deployment.</p>
+      </div>
+    </section>
+
+    <section class="event">
+      <h2>International Security Symposium</h2>
+      <div class="images">
+        <img src="images/event4a.jpg" alt="International Security Symposium Image 1" />
+        <img src="images/event4b.jpg" alt="International Security Symposium Image 2" />
+      </div>
+      <div class="text-group">
+        <strong>Introduction:</strong>
+        <p>A symposium with global experts discussing trends and challenges in cybersecurity.</p>
+      </div>
+      <div class="text-group">
+        <strong>Objective:</strong>
+        <p>To share knowledge and collaborate on solving international security threats.</p>
+      </div>
+      <div class="text-group">
+        <strong>Authors:</strong>
+        <p>Ahmed, Global Security Consortium</p>
+      </div>
+      <div class="text-group">
+        <strong>My Function:</strong>
+        <p>Research presenter and workshop facilitator.</p>
+      </div>
+      <div class="text-group">
+        <strong>What I Did:</strong>
+        <p>Presented research findings, moderated panel discussions, and connected with peers worldwide.</p>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>
