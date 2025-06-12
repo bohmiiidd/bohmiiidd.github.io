@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Certificates - Ahmed Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background-color: #121212;
+      color: #ccc;
+      display: flex;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Canvas background */
+    canvas#bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      background-color: #121212;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      background-color: #111;
+      color: #ccc;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+    }
+
+    .sidebar h2 {
+      margin-bottom: 40px;
+      font-size: 26px;
+      font-weight: 700;
+      color: #ccc;
+      letter-spacing: 2px;
+    }
+
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .sidebar nav a {
+      color: #888;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 15px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .sidebar nav a:hover {
+      color: #ccc;
+      background-color: #333;
+    }
+
+    .sidebar nav a.active {
+      color: #ccc;
+      background-color: #333;
+      font-weight: 700;
+    }
+
+    /* Main content */
+    main.content {
+      margin-left: 220px;
+      padding: 60px 30px;
+      flex: 1;
+      max-width: calc(100% - 220px);
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      color: #ccc;
+    }
+
+    main.content h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: #ddd;
+      letter-spacing: 1.5px;
+      text-align: center;
+    }
+
+    .certificates-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      justify-items: center;
+    }
+
+    .certificate-card {
+      background: #1a1a1a;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+      width: 320px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease;
+    }
+
+    .certificate-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+    }
+
+    .certificate-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      background: #333;
+    }
+
+    .certificate-content {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .certificate-description {
+      font-size: 15px;
+      color: #aaa;
+      margin-bottom: 15px;
+      flex-grow: 1;
+      line-height: 1.4;
+    }
+
+    .certificate-production {
+      font-size: 14px;
+      color: #666;
+      font-style: italic;
+      text-align: right;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 10px;
+      left: 220px;
+      width: calc(100% - 220px);
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Canvas background -->
+  <canvas id="bg"></canvas>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>Ahmed</h2>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="machines.html">Machines</a>
+      <a href="certificates.html" class="active">Certificates</a>
+      <a href="blog.html">Blog</a>
+      <a href="notes.html">Notes</a>
+      <a href="experience.html">Experience</a>
+      <a href="contact.html">Contact</a>
+      <a href="events.html">Events</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="content">
+    <h1>Portfolio</h1>
+
+    <div class="certificates-container">
+
+      <div class="certificate-card">
+        <img src="images/cert1.jpg" alt="Certificate 1" class="certificate-image" />
+        <div class="certificate-content">
+          <p class="certificate-description">
+            Completed the Offensive Security Certified Professional (OSCP) certification, demonstrating advanced penetration testing skills.
+          </p>
+          <p class="certificate-production">Production: Offensive Security</p>
+        </div>
+      </div>
+
+      <div class="certificate-card">
+        <img src="images/cert2.jpg" alt="Certificate 2" class="certificate-image" />
+        <div class="certificate-content">
+          <p class="certificate-description">
+            Earned the Certified Ethical Hacker (CEH) certification, focusing on ethical hacking methodologies and best practices.
+          </p>
+          <p class="certificate-production">Production: EC-Council</p>
+        </div>
+      </div>
+
+      <div class="certificate-card">
+        <img src="images/cert3.jpg" alt="Certificate 3" class="certificate-image" />
+        <div class="certificate-content">
+          <p class="certificate-description">
+            Completed Google IT Support Professional Certificate, gaining skills in IT fundamentals and troubleshooting.
+          </p>
+          <p class="certificate-production">Production: Google</p>
+        </div>
+      </div>
+
+      <!-- Add more certificates here as needed -->
+
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Ahmed. All rights reserved.
+  </footer>
+
+  <!-- Background animation script -->
+  <script>
+    const canvas = document.getElementById('bg');
+    const ctx = canvas.getContext('2d');
+
+    let width, height;
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    const lines = [];
+    for (let i = 0; i < 80; i++) {
+      lines.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        length: Math.random() * 100 + 20,
+        speed: Math.random() * 0.5 + 0.2,
+        opacity: Math.random() * 0.15 + 0.02
+      });
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      lines.forEach(line => {
+        ctx.beginPath();
+        ctx.moveTo(line.x, line.y);
+        ctx.lineTo(line.x, line.y + line.length);
+        ctx.strokeStyle = `rgba(200, 200, 200, ${line.opacity})`;
+        ctx.stroke();
+        line.y += line.speed;
+        if (line.y > height) {
+          line.y = -line.length;
+          line.x = Math.random() * width;
+        }
+      });
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+
+</body>
+</html>
